@@ -1,0 +1,61 @@
+% Shared TikZ macros for the "Gaussian wave" amplitude diagrams.
+% Each wave is drawn isolated inside a fixed-size cell, no axes, with an
+% optional probability label placed just outside the bump.
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usetikzlibrary{calc,arrows.meta}
+
+\definecolor{waveblue}{HTML}{3A7CA5}
+\definecolor{wavered}{HTML}{D1495B}
+
+% \gaussiancell{x0}{y0}{sign}{height}{color}{basislabel}{highlight}{problabel}
+% Draws one Gaussian bump centered at (x0,y0), cell width 2.4, height range +-1.1.
+% sign: +1 upright, -1 flipped. height: 0..1 (fraction of max bump height 0.85).
+% basislabel: basis-state ket, always placed BELOW the baseline; empty string = no label.
+% highlight: 1 draws a thin colored box around the cell, 0 = none.
+% problabel: probability value, always placed ABOVE the bump's peak; empty string = no label.
+\newcommand{\gaussiancell}[8]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \pgfmathsetmacro{\amp}{#4*0.85*#3}
+    \pgfmathsetmacro{\wid}{0.30}
+    \draw[black, line width=0.5pt] (-1.15,0) -- (1.15,0);
+    \draw[#5, line width=1.3pt, samples=120, smooth, domain=-1.05:1.05]
+      plot (\x, {\amp*exp(-(\x*\x)/(2*\wid*\wid))});
+    \fill[#5, opacity=0.18, samples=120, domain=-1.05:1.05]
+      plot (\x, {\amp*exp(-(\x*\x)/(2*\wid*\wid))}) -- (1.05,0) -- (-1.05,0) -- cycle;
+    \ifnum#7=1
+      \draw[wavered, line width=0.9pt] (-1.15,-0.65) rectangle (1.15,1.35);
+    \fi
+    \ifx&#6&
+    \else
+      \ifnum#3>0
+        \node[anchor=north, font=\footnotesize] at (0, -0.35) {#6};
+      \else
+        \node[anchor=north, font=\footnotesize] at (0, -0.95) {#6};
+      \fi
+    \fi
+    \ifx&#8&
+    \else
+      \node[anchor=south, font=\small] at (0, 0.95) {#8};
+    \fi
+  \end{scope}
+}
+
+% \wavegrid{rows}{cols}{dx}{dy}{cellfn} where cellfn takes (row,col,index)
+% (grid layout handled inline per-figure instead, for full control over per-cell content)
+
+% \meanline{x0}{y0}{width}{amp}{label}
+% Draws a dotted horizontal line at height amp (in the same units as
+% \gaussiancell's amplitude, i.e. peak height = 0.85 at amp=1) spanning
+% `width` cells wide, centered at (x0,y0), with a small label to its right.
+\newcommand{\meanline}[5]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \pgfmathsetmacro{\amp}{#4*0.85}
+    \draw[gray, line width=0.9pt, densely dotted] (-1.15,\amp) -- (#3-1.15,\amp);
+    \ifx&#5&
+    \else
+      \node[gray, anchor=west, font=\footnotesize] at (#3-1.05,\amp) {#5};
+    \fi
+  \end{scope}
+}

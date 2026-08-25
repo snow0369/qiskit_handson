@@ -1,0 +1,34 @@
+\documentclass[border=4pt]{standalone}
+\input{waves_common.tex}
+\begin{document}
+\begin{tikzpicture}
+  \node[font=\Large] at (4.2, 9.9) {$|\psi\rangle = \alpha_{0000}|0000\rangle + \alpha_{0001}|0001\rangle + \cdots + \alpha_{1111}|1111\rangle$};
+
+  % Row 1
+  \gaussiancell{0}{8.0}{1}{1}{waveblue}{$|0000\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{8.0}{1}{1}{waveblue}{$|0001\rangle$}{0}{$0.25$}
+  \gaussiancell{5.6}{8.0}{1}{1}{waveblue}{$|0010\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{8.0}{1}{1}{waveblue}{$|0011\rangle$}{0}{$0.25$}
+
+  % Row 2
+  \gaussiancell{0}{5.8}{1}{1}{waveblue}{$|0100\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{5.8}{1}{1}{waveblue}{$|0101\rangle$}{0}{$0.25$}
+  \gaussiancell{5.6}{5.8}{1}{1}{waveblue}{$|0110\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{5.8}{1}{1}{waveblue}{$|0111\rangle$}{0}{$0.25$}
+
+  % Row 3: one flipped (negative amplitude, same probability)
+  \gaussiancell{0}{3.6}{1}{1}{waveblue}{$|1000\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{3.6}{-1}{1}{wavered}{$|1001\rangle$}{0}{\textcolor{wavered}{$-0.25$}}
+  \gaussiancell{5.6}{3.6}{1}{1}{waveblue}{$|1010\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{3.6}{1}{1}{waveblue}{$|1011\rangle$}{0}{$0.25$}
+
+  % Row 4
+  \gaussiancell{0}{0.9}{1}{1}{waveblue}{$|1100\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{0.9}{1}{1}{waveblue}{$|1101\rangle$}{0}{$0.25$}
+  \gaussiancell{5.6}{0.9}{1}{1}{waveblue}{$|1110\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{0.9}{1}{1}{waveblue}{$|1111\rangle$}{0}{$0.25$}
+
+  \node[font=\normalsize, text width=16.5cm, align=center] at (4.2, -0.6)
+    {Same probability, opposite sign --- signs are what let amplitudes cancel or reinforce.};
+\end{tikzpicture}
+\end{document}

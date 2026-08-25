@@ -1,0 +1,67 @@
+\documentclass[border=4pt]{standalone}
+\input{waves_common.tex}
+\begin{document}
+\begin{tikzpicture}
+  % ---------- Left panel: after the oracle ----------
+  \node[font=\large] at (4.2, 10.6) {After the oracle: $\alpha_{1001} \to -\alpha_{1001}$};
+
+  \gaussiancell{0}{8.4}{1}{1}{waveblue}{$|0000\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{8.4}{1}{1}{waveblue}{$|0001\rangle$}{0}{$0.25$}
+  \gaussiancell{5.6}{8.4}{1}{1}{waveblue}{$|0010\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{8.4}{1}{1}{waveblue}{$|0011\rangle$}{0}{$0.25$}
+  \meanline{0}{8.4}{11.2}{0.875}{}
+
+  \gaussiancell{0}{6.2}{1}{1}{waveblue}{$|0100\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{6.2}{1}{1}{waveblue}{$|0101\rangle$}{0}{$0.25$}
+  \gaussiancell{5.6}{6.2}{1}{1}{waveblue}{$|0110\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{6.2}{1}{1}{waveblue}{$|0111\rangle$}{0}{$0.25$}
+  \meanline{0}{6.2}{11.2}{0.875}{}
+
+  \gaussiancell{0}{4.0}{1}{1}{waveblue}{$|1000\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{4.0}{-1}{1}{wavered}{$|1001\rangle$}{1}{\textcolor{wavered}{$-0.25$}}
+  \gaussiancell{5.6}{4.0}{1}{1}{waveblue}{$|1010\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{4.0}{1}{1}{waveblue}{$|1011\rangle$}{0}{$0.25$}
+  \meanline{0}{4.0}{11.2}{0.875}{$\bar\alpha=0.219$}
+
+  \gaussiancell{0}{1.3}{1}{1}{waveblue}{$|1100\rangle$}{0}{$0.25$}
+  \gaussiancell{2.8}{1.3}{1}{1}{waveblue}{$|1101\rangle$}{0}{$0.25$}
+  \gaussiancell{5.6}{1.3}{1}{1}{waveblue}{$|1110\rangle$}{0}{$0.25$}
+  \gaussiancell{8.4}{1.3}{1}{1}{waveblue}{$|1111\rangle$}{0}{$0.25$}
+  \meanline{0}{1.3}{11.2}{0.875}{}
+
+  \node[font=\normalsize, text width=11cm, align=center] at (4.2, -0.2)
+    {Same probabilities --- a measurement here still looks uniform.};
+
+  % ---------- Right panel: after inversion about the mean ----------
+  \begin{scope}[shift={(13,0)}]
+    \node[font=\large] at (4.2, 10.6) {After inversion-about-the-mean: $\alpha_i \to 2\bar\alpha-\alpha_i$};
+
+    \gaussiancell{0}{8.4}{1}{0.75}{waveblue}{$|0000\rangle$}{0}{$0.19$}
+    \gaussiancell{2.8}{8.4}{1}{0.75}{waveblue}{$|0001\rangle$}{0}{$0.19$}
+    \gaussiancell{5.6}{8.4}{1}{0.75}{waveblue}{$|0010\rangle$}{0}{$0.19$}
+    \gaussiancell{8.4}{8.4}{1}{0.75}{waveblue}{$|0011\rangle$}{0}{$0.19$}
+    \meanline{0}{8.4}{11.2}{0.875}{}
+
+    \gaussiancell{0}{6.2}{1}{0.75}{waveblue}{$|0100\rangle$}{0}{$0.19$}
+    \gaussiancell{2.8}{6.2}{1}{0.75}{waveblue}{$|0101\rangle$}{0}{$0.19$}
+    \gaussiancell{5.6}{6.2}{1}{0.75}{waveblue}{$|0110\rangle$}{0}{$0.19$}
+    \gaussiancell{8.4}{6.2}{1}{0.75}{waveblue}{$|0111\rangle$}{0}{$0.19$}
+    \meanline{0}{6.2}{11.2}{0.875}{}
+
+    \gaussiancell{0}{4.0}{1}{0.75}{waveblue}{$|1000\rangle$}{0}{$0.19$}
+    \gaussiancell{2.8}{4.0}{1}{1}{wavered}{$|1001\rangle$}{1}{\textcolor{wavered}{$0.47$}}
+    \gaussiancell{5.6}{4.0}{1}{0.75}{waveblue}{$|1010\rangle$}{0}{$0.19$}
+    \gaussiancell{8.4}{4.0}{1}{0.75}{waveblue}{$|1011\rangle$}{0}{$0.19$}
+    \meanline{0}{4.0}{11.2}{0.875}{$\bar\alpha=0.219$}
+
+    \gaussiancell{0}{1.3}{1}{0.75}{waveblue}{$|1100\rangle$}{0}{$0.19$}
+    \gaussiancell{2.8}{1.3}{1}{0.75}{waveblue}{$|1101\rangle$}{0}{$0.19$}
+    \gaussiancell{5.6}{1.3}{1}{0.75}{waveblue}{$|1110\rangle$}{0}{$0.19$}
+    \gaussiancell{8.4}{1.3}{1}{0.75}{waveblue}{$|1111\rangle$}{0}{$0.19$}
+    \meanline{0}{1.3}{11.2}{0.875}{}
+
+    \node[font=\normalsize, text width=11cm, align=center] at (4.2, -0.2)
+      {The solution's probability jumps up --- everyone else shrinks slightly.};
+  \end{scope}
+\end{tikzpicture}
+\end{document}

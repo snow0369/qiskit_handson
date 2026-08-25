@@ -1,0 +1,64 @@
+\documentclass[border=4pt]{standalone}
+\input{waves_common.tex}
+\begin{document}
+\begin{tikzpicture}
+  % ---------- Left panel: before measurement (superposition) ----------
+  \node[font=\large] at (4.2, 10.6) {Before measurement: superposition of all $N$};
+
+  \gaussiancell{0}{8.4}{1}{1}{waveblue}{$|0000\rangle$}{0}{$0.06$}
+  \gaussiancell{2.8}{8.4}{1}{1}{waveblue}{$|0001\rangle$}{0}{$0.06$}
+  \gaussiancell{5.6}{8.4}{1}{1}{waveblue}{$|0010\rangle$}{0}{$0.06$}
+  \gaussiancell{8.4}{8.4}{1}{1}{waveblue}{$|0011\rangle$}{0}{$0.06$}
+
+  \gaussiancell{0}{6.2}{1}{1}{waveblue}{$|0100\rangle$}{0}{$0.06$}
+  \gaussiancell{2.8}{6.2}{1}{1}{waveblue}{$|0101\rangle$}{0}{$0.06$}
+  \gaussiancell{5.6}{6.2}{1}{1}{waveblue}{$|0110\rangle$}{0}{$0.06$}
+  \gaussiancell{8.4}{6.2}{1}{1}{waveblue}{$|0111\rangle$}{0}{$0.06$}
+
+  \gaussiancell{0}{4.0}{1}{1}{waveblue}{$|1000\rangle$}{0}{$0.06$}
+  \gaussiancell{2.8}{4.0}{1}{1}{waveblue}{$|1001\rangle$}{0}{$0.06$}
+  \gaussiancell{5.6}{4.0}{1}{1}{waveblue}{$|1010\rangle$}{0}{$0.06$}
+  \gaussiancell{8.4}{4.0}{1}{1}{waveblue}{$|1011\rangle$}{0}{$0.06$}
+
+  \gaussiancell{0}{1.8}{1}{1}{waveblue}{$|1100\rangle$}{0}{$0.06$}
+  \gaussiancell{2.8}{1.8}{1}{1}{waveblue}{$|1101\rangle$}{0}{$0.06$}
+  \gaussiancell{5.6}{1.8}{1}{1}{waveblue}{$|1110\rangle$}{0}{$0.06$}
+  \gaussiancell{8.4}{1.8}{1}{1}{waveblue}{$|1111\rangle$}{0}{$0.06$}
+
+  \node[font=\normalsize, text width=11cm, align=center] at (4.2, 0.3)
+    {All 16 outcomes are ``in play''\\ --- but only in the sense that each has some probability.};
+
+  % ---------- Arrow ----------
+  \draw[-{Latex[length=4mm]}, line width=1.3pt] (9.9,4.0) -- (12.1,4.0);
+  \node[font=\normalsize, align=center] at (11, 4.8) {measure};
+  \node[font=\normalsize, align=center] at (11, 3.3) {(collapse)};
+
+  % ---------- Right panel: after measurement (collapsed) ----------
+  \begin{scope}[shift={(13.9,0)}]
+    \node[font=\large] at (4.2, 10.6) {After measurement: collapsed to one outcome};
+
+    \gaussiancell{0}{8.4}{1}{0}{waveblue}{$|0000\rangle$}{0}{$0$}
+    \gaussiancell{2.8}{8.4}{1}{0}{waveblue}{$|0001\rangle$}{0}{$0$}
+    \gaussiancell{5.6}{8.4}{1}{0}{waveblue}{$|0010\rangle$}{0}{$0$}
+    \gaussiancell{8.4}{8.4}{1}{0}{waveblue}{$|0011\rangle$}{0}{$0$}
+
+    \gaussiancell{0}{6.2}{1}{0}{waveblue}{$|0100\rangle$}{0}{$0$}
+    \gaussiancell{2.8}{6.2}{1}{0}{waveblue}{$|0101\rangle$}{0}{$0$}
+    \gaussiancell{5.6}{6.2}{1}{0}{waveblue}{$|0110\rangle$}{0}{$0$}
+    \gaussiancell{8.4}{6.2}{1}{0}{waveblue}{$|0111\rangle$}{0}{$0$}
+
+    \gaussiancell{0}{4.0}{1}{0}{waveblue}{$|1000\rangle$}{0}{$0$}
+    \gaussiancell{2.8}{4.0}{1}{1}{wavered}{$|1001\rangle$}{1}{\textcolor{wavered}{$1$}}
+    \gaussiancell{5.6}{4.0}{1}{0}{waveblue}{$|1010\rangle$}{0}{$0$}
+    \gaussiancell{8.4}{4.0}{1}{0}{waveblue}{$|1011\rangle$}{0}{$0$}
+
+    \gaussiancell{0}{1.8}{1}{0}{waveblue}{$|1100\rangle$}{0}{$0$}
+    \gaussiancell{2.8}{1.8}{1}{0}{waveblue}{$|1101\rangle$}{0}{$0$}
+    \gaussiancell{5.6}{1.8}{1}{0}{waveblue}{$|1110\rangle$}{0}{$0$}
+    \gaussiancell{8.4}{1.8}{1}{0}{waveblue}{$|1111\rangle$}{0}{$0$}
+
+    \node[font=\normalsize, text width=11cm, align=center] at (4.2, 0.3)
+      {One random outcome, probability $1$\\ --- every other outcome is gone. You only get to do this once.};
+  \end{scope}
+\end{tikzpicture}
+\end{document}
