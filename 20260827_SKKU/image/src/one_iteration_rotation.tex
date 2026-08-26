@@ -1,0 +1,51 @@
+\documentclass[border=4pt]{standalone}
+\input{waves_common.tex}
+\begin{document}
+\begin{tikzpicture}
+  % Geometry: |s'> along the x-axis, |w> along the y-axis. Start at |s>,
+  % angle thetaDeg above |s'>. Oracle reflects across |s'> (the x-axis) to
+  % angle -thetaDeg. Diffuser reflects that across |s> (angle thetaDeg) to
+  % land at angle 3*thetaDeg -- a net rotation of 2*thetaDeg toward |w>.
+  \def\R{5.2}
+  \pgfmathsetmacro{\thetaDeg}{18}     % theta, exaggerated for legibility
+  \pgfmathsetmacro{\afterOracle}{-\thetaDeg}
+  \pgfmathsetmacro{\afterDiffuser}{3*\thetaDeg}
+
+  % ---------- axes ----------
+  \draw[-{Latex[length=3mm]}, line width=1pt, gray] (0,0) -- (\R+1.0,0);
+  \node[gray, font=\normalsize] at (\R+1.35,0) {$|s'\rangle$};
+  \draw[-{Latex[length=3mm]}, line width=1pt, gray] (0,-2.0) -- (0,\R+0.6);
+  \node[gray, font=\normalsize] at (0.75,\R+0.55) {$|w\rangle$};
+
+  % ---------- reference: theta wedge from x-axis to |s> ----------
+  \draw[gray, densely dotted, line width=0.8pt] (\R,0) arc (0:\thetaDeg:\R);
+  \node[gray, font=\footnotesize] at ({1.35*cos(\thetaDeg/2)},{1.35*sin(\thetaDeg/2)}) {$\theta$};
+
+  % ---------- Step 0: |s> ----------
+  \draw[black, line width=1.6pt, -{Latex[length=3mm]}] (0,0) -- ({\R*cos(\thetaDeg)},{\R*sin(\thetaDeg)});
+  \node[black, font=\normalsize\bfseries] at ({\R*cos(\thetaDeg)+0.55},{\R*sin(\thetaDeg)+0.5}) {$|s\rangle$};
+
+  % ---------- Step 1: after oracle (reflect across |s'>, the x-axis) ----------
+  \draw[waveblue, line width=1.6pt, -{Latex[length=3mm]}] (0,0) -- ({\R*cos(\afterOracle)},{\R*sin(\afterOracle)});
+  \node[waveblue, font=\normalsize\bfseries] at ({\R*cos(\afterOracle)+0.65},{\R*sin(\afterOracle)-0.15}) {$U_f|s\rangle$};
+  \draw[waveblue, densely dotted, line width=0.8pt] ({\R*cos(\afterOracle)},{\R*sin(\afterOracle)}) arc (\afterOracle:0:\R);
+
+  % ---------- Step 2: after diffuser (reflect across |s>) ----------
+  \draw[wavered, line width=2pt, -{Latex[length=3mm]}] (0,0) -- ({\R*cos(\afterDiffuser)},{\R*sin(\afterDiffuser)});
+  \node[wavered, font=\normalsize\bfseries] at ({\R*cos(\afterDiffuser)-1.05},{\R*sin(\afterDiffuser)+0.15}) {$U_sU_f|s\rangle$};
+  \draw[wavered, densely dotted, line width=0.8pt] ({\R*cos(\thetaDeg)},{\R*sin(\thetaDeg)}) arc (\thetaDeg:\afterDiffuser:\R);
+
+  % ---------- 2*theta net-rotation callout ----------
+  \draw[wavered, densely dashed, line width=0.9pt] (0,0) -- ({\R*cos(\afterDiffuser)},{\R*sin(\afterDiffuser)});
+  \node[wavered, font=\footnotesize] at ({2.75*cos(2*\thetaDeg)},{2.75*sin(2*\thetaDeg)+0.35}) {$2\theta$};
+
+  % ---------- legend ----------
+  \node[font=\normalsize, align=left] at (\R+2.4,\R-1.3)
+    {\textcolor{waveblue}{\bfseries Oracle} $U_f$: reflect across $|s'\rangle$\\[4pt]
+     \textcolor{wavered}{\bfseries Diffuser} $U_s$: reflect across $|s\rangle$\\[4pt]
+     Two reflections = rotation by $2\theta$};
+
+  \node[font=\normalsize, text width=17.5cm, align=center] at (\R/2+1,-2.7)
+    {One Grover iteration = one oracle reflection + one diffuser reflection\\ --- together, a fixed rotation by $2\theta$ toward the winner.};
+\end{tikzpicture}
+\end{document}
